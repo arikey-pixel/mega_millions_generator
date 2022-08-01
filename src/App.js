@@ -85,11 +85,8 @@ class App extends Component{
             onClick={this.numberOfCards}/>
           <h2>{this.state.number}</h2>
         <button 
-          className="btn-RandomNumber" 
-          onClick={this.generateRandomNumber}>Random Number</button>
-        <button 
-          className='btn-addNumber'
-          onClick={this.addNumber}>Add Multiplier Number</button>
+          className="btn-GenerateRandomNumber" 
+          onClick={this.generateRandomNumber}>Generate Random Numbers</button>
       </div>
       </div>
     )
