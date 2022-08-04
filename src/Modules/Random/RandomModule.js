@@ -70,10 +70,18 @@ class RandomModule extends Component{
     return data;
   }
 
+  // handleKeyPress: Handles when ever the user presses the enter key
+  handleKeyPress(e){
+    if(e.key === "Enter"){
+        this.handleClickRandomNumberCard();
+    }
+  }
+
     render() {
         return (
             <div>
             <input 
+            onKeyPress={(e) => this.handleKeyPress(e)}
               type={'number'} 
               onChange={(e) => this.changeCardNum(e)}
               min="1" 
