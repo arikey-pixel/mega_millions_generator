@@ -1,56 +1,28 @@
-import React, { Component, useState } from 'react';
+import React, { Component} from 'react';
 import './App.css';
+import RandomNnumberCard from './RandomNnumberCard';
 
-var counter = -1;
+var card = new RandomNnumberCard();
+
+// App: The main component that handles button clicks.
 class App extends Component{
   constructor(){
     super()
     this.state ={
-      number: [], 
       cardNum: "",
+      number:[],
     }
-
-    this.generateRandomNumber = this.generateRandomNumber.bind(this);
-    this.addNumber = this.addNumber.bind(this);
-    this.numberOfCards = this.numberOfCards.bind(this);
-    this.changeCardNum = this.changeCardNum.bind(this);
+    //this.numberOfCards = this.numberOfCards.bind(this);
+    //this.changeCardNum = this.changeCardNum.bind(this);
+    this.handleClickRandomNumberCard = this.handleClickRandomNumberCard.bind(this);
   }
 
-  // Adds a number at the end of the array of numbers
-  addNumber(){
-    var addRandom = Math.floor((Math.random()* 25 ) + 1);
-    if(counter == 0){
-      this.setState({
-        number: this.state.number.concat(" " + addRandom)
-      })
-      counter += 1
-    }
-  }
-
-  // Creats the array of random numbers
-  copyArray(){
-    let copy = [];
-    for(let i = 0; i < 5; i++){
-      var random = Math.floor((Math.random()* 70) + 1);
-      if(!copy.includes(random)){
-        copy.push(random);
-      }
-      else{
-        i--;
-      }
-    }
-    
-    return copy;
-  }
-
-  // Gets the array of random numbers.
-  generateRandomNumber(){
-    //var number = this.copyArray().join(' ');
-    //this.setState({number})
-      this.setState({
-        number: this.copyArray().join(' '),
-      })
-      counter = 0;
+  // handleClickRandomNumberCard: Sets the state value of number array
+  // that is generated through the RandomNumberCard class
+  handleClickRandomNumberCard = () =>{
+    this.setState({
+      number: card.generateRandomNumber(),
+    })
   }
 
   numberOfCards(){
@@ -79,14 +51,16 @@ class App extends Component{
             value={this.state.cardNum} 
             placeholder="Type in here"/>
           <input
-          className='btn-submit'
+            className='btn-submit'
             type={"submit"} 
             value = "submit" 
             onClick={this.numberOfCards}/>
-          <h2>{this.state.number}</h2>
-        <button 
-          className="btn-GenerateRandomNumber" 
-          onClick={this.generateRandomNumber}>Generate Random Numbers</button>
+            <div>
+              <RandomNnumberCard number={this.state.number}/>
+            <button 
+              className="btn-GenerateRandomNumber" 
+              onClick={this.handleClickRandomNumberCard}>Generate Random Numbers</button>
+            </div>
       </div>
       </div>
     )
