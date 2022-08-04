@@ -64,11 +64,6 @@ class App extends Component{
             onChange={(e) => this.changeCardNum(e)}
             min="1" 
             placeholder="Type in here"/>
-          <input
-            className='btn-submit'
-            type={"submit"} 
-            value = "submit" 
-            onClick={this.handleClickRandomNumberCard}/>
             <div>
             {data.map(((item)=> (
                 <div key={item.id}>
