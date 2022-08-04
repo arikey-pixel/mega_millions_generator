@@ -3,38 +3,53 @@ import './App.css';
 import RandomNnumberCard from './RandomNnumberCard';
 
 var card = new RandomNnumberCard();
+const data = new Array().map((value, index) => ({
+  id: index, body: value,
+}));
 
 // App: The main component that handles button clicks.
 class App extends Component{
   constructor(){
     super()
     this.state ={
-      cardNum: "",
-      number:[],
+      cardNum: 1,
+      number: [],
+      data,
     }
-    //this.numberOfCards = this.numberOfCards.bind(this);
-    //this.changeCardNum = this.changeCardNum.bind(this);
     this.handleClickRandomNumberCard = this.handleClickRandomNumberCard.bind(this);
   }
 
-  // handleClickRandomNumberCard: Sets the state value of number array
-  // that is generated through the RandomNumberCard class
-  handleClickRandomNumberCard = () =>{
+  // onClearArray: Sets the length of data array to zero to empty the
+  // array.
+  onClearArray = () => {
     this.setState({
-      number: card.generateRandomNumber(),
+      data: data.length = 0,
     })
   }
 
-  numberOfCards(){
+  // TODO: Change the name of this variable as well as move it
+  // copy: Generates all the nessary card to diplay on the application
+  copy(){
     for(let i = 0; i < this.state.cardNum; i++){
-       this.generateRandomNumber();
+     data.push({id: i + 1,body: card.generateRandomNumber()})
     }
+    return data;
+  }
+  
+  // handleClickRandomNumberCard: Sets the state value of number array
+  // that is generated through the RandomNumberCard class.
+  handleClickRandomNumberCard = () =>{
+    this.onClearArray();
+    this.setState({
+      data: this.copy(),
+    })
   }
 
+  // changeCardNum: Sets state of CarNum variable when user inputs
+  // a new number.
   changeCardNum(e){
-    let cardNum = e.target.value;
     this.setState({
-      cardNum:cardNum
+      cardNum: e.target.value,
     })
   }
 
@@ -46,17 +61,22 @@ class App extends Component{
           <h3 className="Question-Header">How Many cards are you playing?</h3>
           <input 
             type={'number'} 
-            onChange={this.changeCardNum}
+            onChange={(e) => this.changeCardNum(e)}
             min="1" 
-            value={this.state.cardNum} 
             placeholder="Type in here"/>
           <input
             className='btn-submit'
             type={"submit"} 
             value = "submit" 
-            onClick={this.numberOfCards}/>
+            onClick={this.handleClickRandomNumberCard}/>
             <div>
-              <RandomNnumberCard number={this.state.number}/>
+            {data.map(((item)=> (
+                <div key={item.id}>
+                <h2>{item.id} - {item.body}</h2>
+                </div>
+              )))}
+            </div>
+            <div>
             <button 
               className="btn-GenerateRandomNumber" 
               onClick={this.handleClickRandomNumberCard}>Generate Random Numbers</button>
