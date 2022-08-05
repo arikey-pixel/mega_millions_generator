@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./RandomModule.css";
 
 const data = [].map((value, index) => ({
     id: index, body: value,
@@ -80,22 +81,24 @@ class RandomModule extends Component{
     render() {
         return (
             <div>
-            <input 
+            <input className="input-card-number"
             onKeyPress={(e) => this.handleKeyPress(e)}
               type={'number'} 
               onChange={(e) => this.changeCardNum(e)}
               min="1" 
               placeholder="Type in here"/>
               <div>
+              <ul className="item-list">
               {data.map(((item)=> (
-                  <div key={item.id}>
+                  <li key={item.id}>
                   <h2>{item.id} - {item.body}</h2>
-                  </div>
+                  </li>
                 )))}
+              </ul>
               </div>
               <div>
-              <button 
-                className="btn-GenerateRandomNumber" 
+              <button
+                className="btn-generate-random-number" 
                 onClick={this.handleClickRandomNumberCard}>Generate Random Numbers</button>
               </div>
           </div>
