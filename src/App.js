@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import './App.css';
-import Modules from './Modules/Random/RandomModule';
+import Modules from './Components/Random/RandomCards';
 
 // App: The main component that handles all components for application.
 class App extends Component{

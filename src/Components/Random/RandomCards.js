@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./RandomModule.css";
+import "./RandomCards.css";
 
 const data = [].map((value, index) => ({
     id: index, body: value,
