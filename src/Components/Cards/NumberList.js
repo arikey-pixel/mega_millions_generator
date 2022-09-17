@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./RandomCards.css";
+import "./NumberListStyle.css";
 
 
 const data = [].map((value, index) => ({
