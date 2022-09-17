@@ -1,113 +1,92 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./NumberListStyle.css";
+import NumberInput from "../Input/NumberInput";
 
-
-const data = [].map((value, index) => ({
+const NumberList = () =>{
+  const data = [].map((value, index) => ({
     id: index, body: value,
   }));
+const[numbers, setNumbers] = useState([]);
+const[cards,setCards] = useState(1);
+const[num, setNum] = useState([]);
+const array = [];
 
-
-class RandomModule extends Component{
-    constructor(){
-        super()
-        this.state={
-            data,
-            cardNum: 1,
-            arr: [],
-        }
-    }
-
-  // changeCardNum: Sets state of CarNum variable when user inputs
-  // a new number.
-  changeCardNum(e){
-    this.setState({
-      cardNum: e.target.value,
-    })
+// handleChange: This will change the number of cards from the default.
+function handleChange(e){
+  if(e.target.value.length === 0){
+    setCards(1);
   }
-
-  // onClearArray: Sets the length of data array to zero to empty the
-  // array.
-  onClearArray() {
-    this.setState({
-      data: data.length = 0,
-    })
+  else{
+    setCards(e.target.value)
   }
+}
+
+// handleKeyPress: This will handle when the user wants to press the 
+// enter instead of pressing the Generate Button
+function handleKeyPress(e){
+  if(e.key === "Enter"){
+    handleClick();
+  }
+}
+
+// clearArray: This will clear the numbers array of all current numbers.
+function clearArray(){
+  numbers.length = 0;
+}
 
   // GenerateRandomNumber: Create a array of 5 unique numbers.
   // picks number from 1-70 
-  generateRandomNumber(){
-    let copy = [];
+  function generate(){
+    const arr = [];
     for(let i = 0; i < 5; i++){
-      var random = Math.floor((Math.random()* 70) + 1);
-      if(!copy.includes(random)){
-        copy.push(random);
+      var num = Math.floor((Math.random()* 70) + 1);
+      if(!arr.includes(num)){
+        arr.push(num);
       }
       else{
         i--;
       }
     }
-    return this.addMegaBallNumber(copy.join(' '));
+    return addMegaBallNumber(arr);
   }
 
-  // AddMegaBallNumber: Concats a Random Number from 1-25 at the
+  // handleClick: \This will set all the random numbers cards.
+  function handleClick(){
+    clearArray();
+    for(let i = 0; i < cards; i++){
+      data.push({body: generate()})
+    }
+    setNumbers(data);
+    circleNumbers();
+  }
+
+  // circleNumbers: This converts the array into seperate arrays to add circle around the numbers
+  function circleNumbers(){
+    const test = [];
+
+    data.forEach((item) => {
+      array.push(item.body);
+    });
+
+    for(var i = 0; i < array.length; i++){
+      test.push(array[i]);
+    }
+    setNum(test);
+  }
+
+   // AddMegaBallNumber: Concats a Random Number from 1-25 at the
   // end of the random number array
-  addMegaBallNumber(randomarray){
-    var addRandom = Math.floor((Math.random()* 25 ) + 1);
-    return randomarray.concat(" " + addRandom);
+  function addMegaBallNumber(randomarray){
+    var addRandom = Math.floor((Math.random()*25) + 1);
+    return randomarray.concat(addRandom);
   }
 
-  // handleClickRandomNumberCard: Sets the state value of number array
-  // that is generated through the RandomNumberCard class.
-  handleClickRandomNumberCard = () =>{
-    this.onClearArray();
-    this.setState({
-      data: this.createNumberCards(),
-    })
-  }
-
-  // TODO: Change the name of this variable as well as move it
-  // copy: Generates all the nessary card to diplay on the application
-  createNumberCards(){
-    for(let i = 0; i < this.state.cardNum; i++){
-     data.push({id: i + 1,body: this.generateRandomNumber()})
-    }
-    return data;
-  }
-
-  // handleKeyPress: Handles when ever the user presses the enter key
-  handleKeyPress(e){
-    if(e.key === "Enter"){
-        this.handleClickRandomNumberCard();
-    }
-  }
-
-    render() {
-        return (
-            <div>
-                   <input className="input-card-number"
-            onKeyPress={(e) => this.handleKeyPress(e)}
-              type={'number'} 
-              onChange={(e) => this.changeCardNum(e)}
-              min="1" 
-              placeholder="Type in here"/>
-              <div>
-              <ul className="item-list">
-              {data.map(((item)=> (
-                  <li key={item.id}>
-                  <h2>{item.body}</h2>
-                  </li>
-                )))}
-              </ul>
-              </div>
-              <div>
-              <button
-                className="btn-generate-random-number" 
-                onClick={this.handleClickRandomNumberCard}>Generate Random Numbers</button>
-              </div>
-          </div>
-        );
-    }
+  return(
+    <div>
+      <NumberInput onChange={(e) => handleChange(e)} onKeyPress={(e) => handleKeyPress(e)}/>
+    </div>
+  )
 
 }
 
-export default RandomModule
+export default NumberList;
