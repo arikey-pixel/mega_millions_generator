@@ -1,6 +1,7 @@
 import React from "react";
 import './NumberInputStyle.css'
 
+// NumberInput Component handles all the input box operations.
 const NumberInput = ({onChange, onKeyPress}) => {
     return(
         <div>
