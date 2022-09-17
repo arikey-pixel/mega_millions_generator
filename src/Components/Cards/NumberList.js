@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./NumberListStyle.css";
 import NumberInput from "../Input/NumberInput";
+import GenerateRandomButton from "../Button/GenerateButton";
 
 const NumberList = () =>{
   const data = [].map((value, index) => ({
@@ -84,6 +85,7 @@ function clearArray(){
   return(
     <div>
       <NumberInput onChange={(e) => handleChange(e)} onKeyPress={(e) => handleKeyPress(e)}/>
+      <GenerateRandomButton onClick={handleClick}/>
     </div>
   )
 
