@@ -1,7 +1,7 @@
 import React from "react";
 import './HeaderStyle.css'
 
-// Header Component Handles all headers on the Page
+// Header Component Handles all headers on the Page.
 const Header = () =>{
     return(
         <div>
