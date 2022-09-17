@@ -1,23 +1,15 @@
-import React, { Component} from 'react';
 import './App.css';
-import Components from './Components/Random/RandomCards';
+import NumberList from './Components/Cards/NumberList';
+import Header from './Components/Header/Header';
 
-// TODO: Create a Header Component
 // App: The main component that handles all components for application.
-class App extends Component{
-
-  render(){
+function App () {
     return(
       <div className="App">
-        <div className="cointainer">
-          <h1 className= "Lottery-Header">Lottery Number Generator</h1>
-          <h3 className="Question-Header">How Many cards are you playing?</h3>
+        <Header/>
+        <NumberList/>
       </div>
-      <Components/>
-      </div>
-    )
+    );
   }
-}
-
 
 export default App;
