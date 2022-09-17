@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import "./RandomCards.css";
 
+
 const data = [].map((value, index) => ({
     id: index, body: value,
   }));
+
 
 class RandomModule extends Component{
     constructor(){
@@ -11,6 +13,7 @@ class RandomModule extends Component{
         this.state={
             data,
             cardNum: 1,
+            arr: [],
         }
     }
 
@@ -81,7 +84,7 @@ class RandomModule extends Component{
     render() {
         return (
             <div>
-            <input className="input-card-number"
+                   <input className="input-card-number"
             onKeyPress={(e) => this.handleKeyPress(e)}
               type={'number'} 
               onChange={(e) => this.changeCardNum(e)}
@@ -91,7 +94,7 @@ class RandomModule extends Component{
               <ul className="item-list">
               {data.map(((item)=> (
                   <li key={item.id}>
-                  <h2>{item.id} - {item.body}</h2>
+                  <h2>{item.body}</h2>
                   </li>
                 )))}
               </ul>

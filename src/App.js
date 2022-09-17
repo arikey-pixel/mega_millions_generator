@@ -1,7 +1,8 @@
 import React, { Component} from 'react';
 import './App.css';
-import Modules from './Components/Random/RandomCards';
+import Components from './Components/Random/RandomCards';
 
+// TODO: Create a Header Component
 // App: The main component that handles all components for application.
 class App extends Component{
 
@@ -12,7 +13,7 @@ class App extends Component{
           <h1 className= "Lottery-Header">Lottery Number Generator</h1>
           <h3 className="Question-Header">How Many cards are you playing?</h3>
       </div>
-      <Modules/>
+      <Components/>
       </div>
     )
   }
