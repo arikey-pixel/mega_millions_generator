@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./NumberListStyle.css";
 import NumberInput from "../Input/NumberInput";
 import GenerateRandomButton from "../Button/GenerateButton";
+import CircleCards from "../Circle/CircleCards";
 
 const NumberList = () =>{
   const data = [].map((value, index) => ({
@@ -85,6 +86,7 @@ function clearArray(){
   return(
     <div>
       <NumberInput onChange={(e) => handleChange(e)} onKeyPress={(e) => handleKeyPress(e)}/>
+      <CircleCards arrayCards={num}/>
       <GenerateRandomButton onClick={handleClick}/>
     </div>
   )
